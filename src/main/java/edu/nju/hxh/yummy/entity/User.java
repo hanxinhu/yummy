@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author hxh
@@ -39,7 +40,10 @@ public class User {
     private State state;
     private int level;
     private double balance;
-
+    /**
+     * 保存uuid 激活用
+     */
+    private String token;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Address> addresses;
