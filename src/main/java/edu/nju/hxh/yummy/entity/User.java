@@ -27,19 +27,20 @@ public class User {
         /**
          * 已注销
          */
-        DELETED
+        CANCELED
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer uid;
-    private String mail;
+    private String email;
     private String name;
     private String password;
     private String phone;
-    private State state;
-    private int level;
-    private double balance;
+
+    private State state = State.UNAUTHORIZED;
+    private int level = 0;
+    private double balance = 0;
     /**
      * 保存uuid 激活用
      */
@@ -52,8 +53,8 @@ public class User {
      */
     private int score;
 
-    public User(String mail, String name, String password, String phone) {
-        this.mail = mail;
+    public User(String email, String name, String password, String phone) {
+        this.email = email;
         this.name = name;
         this.password = password;
         this.phone = phone;

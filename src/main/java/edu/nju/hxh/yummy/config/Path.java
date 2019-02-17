@@ -8,14 +8,13 @@ import org.springframework.context.annotation.PropertySource;
 
 /**
  * @author hxh
- * @date 2019-02-16 08:29
+ * @date 2019-02-17 09:12
  */
 @Configuration
-@EnableConfigurationProperties(MailBase.class)
-@ConfigurationProperties(prefix = "mail")
+@EnableConfigurationProperties(Path.class)
+@ConfigurationProperties(prefix = "path")
 @PropertySource("classpath:application.properties")
 @Data
-public class MailBase {
-    public String before;
-    public String subject;
+public class Path {
+    public String path;
 }

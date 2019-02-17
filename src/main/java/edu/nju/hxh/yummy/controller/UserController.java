@@ -1,8 +1,13 @@
 package edu.nju.hxh.yummy.controller;
 
+import edu.nju.hxh.yummy.entity.User;
+import edu.nju.hxh.yummy.service.MailService;
+import edu.nju.hxh.yummy.service.UserService;
+import edu.nju.hxh.yummy.util.ResultMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author hxh
@@ -10,12 +15,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
-    @Value("${mail.context}")
-    public String value;
+    @Autowired
+    MailService mailService;
+    @Autowired
+    UserService userService;
 
-    @RequestMapping("/name")
-    public String  getName(){ System.out.println(value);
-        return "/index.html";
+
+    @ResponseBody
+    @RequestMapping(value = "/signUp",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public String signUp(@RequestBody User user) {
+        try {
+            String token = mailService.sendToken(user.getEmail());
+
+            user.setToken(token);
+            userService.signUp(user);
+        } catch (Exception e) {
+            return "false";
+        }
+        return "true";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/logIn",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessage logIn(@RequestBody User user) {
+        return userService.logIn(user);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "")
+    public ResultMessage activate(String token) {
+        return userService.activate(token);
+    }
+
+
 }
