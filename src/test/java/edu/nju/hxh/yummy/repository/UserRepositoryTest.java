@@ -19,7 +19,7 @@ public class UserRepositoryTest {
     UserRepository userRepository;
  @Test
     public void test1(){
-     System.out.println(userRepository!=null);
+     System.out.println(userRepository==null);
  }
  @Test
     public void test2(){

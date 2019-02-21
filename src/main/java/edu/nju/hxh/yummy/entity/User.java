@@ -46,7 +46,8 @@ public class User {
      */
     private String token;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id",foreignKey = @ForeignKey(name = "user_id",value = ConstraintMode.CONSTRAINT))
     private List<Address> addresses;
     /**
      * 积分 用于确定用户等级
@@ -69,5 +70,12 @@ public class User {
             addresses = new ArrayList<>();
         }
         addresses.add(address);
+    }
+    public void putKeyInAddress(){
+        if(this.getAddresses()!=null){
+            for(Address address : this.getAddresses()){
+                address.setUser(this);
+            }
+        }
     }
 }

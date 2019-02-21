@@ -1,5 +1,6 @@
 package edu.nju.hxh.yummy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -34,7 +35,8 @@ public class Address {
     private String phone;
 
     @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id",foreignKey = @ForeignKey(name = "user_id"))
+    @JsonIgnore
     private User user;
 
     public Address(){

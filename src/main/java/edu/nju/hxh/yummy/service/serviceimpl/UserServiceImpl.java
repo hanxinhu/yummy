@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultMessage signUp(User user) {
-        Optional<User> opt = userRepository.findAllByEmail(user.getEmail());
+        Optional<User> opt = userRepository.findByEmail(user.getEmail());
         if (opt.isPresent()) {
             if (opt.get().getState() == User.State.CANCELED) {
                 return ResultMessage.CANCELED;
@@ -35,12 +35,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultMessage logIn(User user) {
-        Optional<User> userOpt = userRepository.findAllByEmail(user.getEmail());
+        System.out.println("email:"+user.getEmail());
+        Optional<User> userOpt = userRepository.findByEmail(user.getEmail());
+        System.out.println(userOpt.get()==null);
         if (userOpt.isPresent()) {
-            if (userOpt.get().getEmail().equals(user.getEmail()) && userOpt.get().getPassword().equals(user.getPassword())) {
+            if (userOpt.get().getEmail().equals(user.getEmail())
+                    && userOpt.get().getPassword().equals(user.getPassword())) {
                 return ResultMessage.SUCCESS;
+            }else {
+                System.out.println("user is null");
             }
         }
+
         return ResultMessage.FAILED;
     }
 
@@ -59,7 +65,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultMessage updateUser(User user) {
+        user.putKeyInAddress();
         userRepository.save(user);
         return ResultMessage.SUCCESS;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+
+        return userRepository.findByEmail(email).get();
     }
 }

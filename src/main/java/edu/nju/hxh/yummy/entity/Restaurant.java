@@ -31,11 +31,15 @@ public class Restaurant {
         HIGH
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer rid;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(length = 7)
+    private int rid;
     private String name;
+    private String password;
+    private String description;
     private Type type;
     private double balance;
+    private String email;
 
     private String province;
     private String city;
@@ -45,14 +49,6 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(String name,  Type type, String province, String city, String district, String street) {
-        this.name = name;
-        this.type = type;
-        this.province = province;
-        this.city = city;
-        this.district = district;
-        this.street = street;
-        this.balance = 0;
-    }
+
 
 }

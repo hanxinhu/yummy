@@ -35,4 +35,11 @@ public interface UserService {
      * @return
      */
     public ResultMessage updateUser(User user);
+
+    /**
+     *
+     * @param email
+     * @return
+     */
+    public User getUserByEmail(String email);
 }
