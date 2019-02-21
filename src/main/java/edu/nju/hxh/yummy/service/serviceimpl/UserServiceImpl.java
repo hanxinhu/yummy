@@ -56,4 +56,10 @@ public class UserServiceImpl implements UserService {
         }
         return ResultMessage.FAILED;
     }
+
+    @Override
+    public ResultMessage updateUser(User user) {
+        userRepository.save(user);
+        return ResultMessage.SUCCESS;
+    }
 }

@@ -28,4 +28,11 @@ public interface UserService {
      * @return
      */
     public ResultMessage activate(String token);
+
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    public ResultMessage updateUser(User user);
 }

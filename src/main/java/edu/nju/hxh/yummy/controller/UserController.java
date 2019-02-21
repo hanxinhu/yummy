@@ -52,6 +52,23 @@ public class UserController {
     public ResultMessage activate(String token) {
         return userService.activate(token);
     }
+    @ResponseBody
+    @RequestMapping(value = "/update",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessage updateUser(@RequestBody User user){
+        return userService.updateUser(user);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/cancel",
+            method = RequestMethod.POST,
+            produces = {"application/json; charset=UTF-8"})
+    public ResultMessage cancelUser(@RequestBody User user){
+        user.setState(User.State.CANCELED);
+        return userService.updateUser(user);
+    }
+
 
 
 }

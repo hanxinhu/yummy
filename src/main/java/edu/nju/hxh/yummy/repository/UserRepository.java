@@ -14,5 +14,6 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User,Integer> {
     Optional<User> findByToken(String token);
 
+
     Optional<User> findAllByEmail(String email);
 }
