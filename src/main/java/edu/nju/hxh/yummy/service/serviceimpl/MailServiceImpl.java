@@ -21,6 +21,7 @@ public class MailServiceImpl implements MailService {
     private String subject;
     @Value("${path.path}")
     private String path;
+
     @Autowired
     private JavaMailSender mailSender;
 

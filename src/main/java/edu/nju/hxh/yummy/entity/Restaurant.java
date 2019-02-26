@@ -7,6 +7,8 @@ package edu.nju.hxh.yummy.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author hxh
@@ -45,6 +47,14 @@ public class Restaurant {
     private String city;
     private String district;
     private String street;
+
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "rid",foreignKey = @ForeignKey(name = "rid",value = ConstraintMode.CONSTRAINT))
+    private Set<Dish> dishes;
+
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "rid",foreignKey = @ForeignKey(name = "rid",value = ConstraintMode.CONSTRAINT))
+    private Set<Combo> combos;
 
     public Restaurant() {
     }

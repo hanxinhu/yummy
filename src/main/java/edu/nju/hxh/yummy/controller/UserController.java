@@ -30,7 +30,6 @@ public class UserController {
     public String signUp(@RequestBody User user) {
         try {
             String token = mailService.sendToken(user.getEmail());
-
             user.setToken(token);
             userService.signUp(user);
         } catch (Exception e) {
@@ -69,12 +68,10 @@ public class UserController {
         return userService.updateUser(user);
     }
 
-    @CrossOrigin
     @ResponseBody
     @RequestMapping(value = "/findUserByEmail")
     public User getUserByEmail(String email){
         return userService.getUserByEmail(email);
     }
-
 
 }
