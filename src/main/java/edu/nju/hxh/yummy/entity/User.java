@@ -45,6 +45,7 @@ public class User {
      * 保存uuid 激活用
      */
     private String token;
+    private String createTime;
 
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id",foreignKey = @ForeignKey(name = "user_id",value = ConstraintMode.CONSTRAINT))

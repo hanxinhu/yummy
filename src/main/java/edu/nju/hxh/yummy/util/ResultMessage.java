@@ -24,6 +24,10 @@ public enum ResultMessage {
     /**
      * 未认证
      */
-    UNAUTHORIZED
+    UNAUTHORIZED,
+    /**
+     * 余额不足
+     */
+    NOTENOUGHMONEY,
 
 }
