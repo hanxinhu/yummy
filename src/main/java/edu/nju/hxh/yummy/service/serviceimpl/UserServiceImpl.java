@@ -37,11 +37,16 @@ public class UserServiceImpl implements UserService {
     public ResultMessage logIn(User user) {
         System.out.println("email:"+user.getEmail());
         Optional<User> userOpt = userRepository.findByEmail(user.getEmail());
-        System.out.println(userOpt.get()==null);
         if (userOpt.isPresent()) {
             if (userOpt.get().getEmail().equals(user.getEmail())
                     && userOpt.get().getPassword().equals(user.getPassword())) {
-                return ResultMessage.SUCCESS;
+                switch (userOpt.get().getState())
+                {
+                    case CANCELED: return ResultMessage.CANCELED;
+                    case UNAUTHORIZED: return ResultMessage.UNAUTHORIZED;
+                    case NORMAL: return ResultMessage.SUCCESS;
+                    default:return ResultMessage.FAILED;
+                }
             }else {
                 System.out.println("user is null");
             }

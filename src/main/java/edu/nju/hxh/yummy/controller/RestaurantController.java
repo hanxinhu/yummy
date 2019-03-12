@@ -2,8 +2,12 @@ package edu.nju.hxh.yummy.controller;
 
 import edu.nju.hxh.yummy.entity.DishItem;
 import edu.nju.hxh.yummy.entity.Restaurant;
+import edu.nju.hxh.yummy.service.RestaurantService;
+import edu.nju.hxh.yummy.util.ResultMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,30 +22,42 @@ import java.util.List;
 @RequestMapping("/restaurant")
 @CrossOrigin
 public class RestaurantController {
+    @Autowired
+    RestaurantService restaurantService;
+
     @RequestMapping("/getAll")
     @ResponseBody
-    public List<Restaurant> getAllRestaurant(){
-        Restaurant restaurant = new Restaurant();
-        restaurant.setName("121");
-        restaurant.setDescription("121211");
-        restaurant.setCity("1121");
-        restaurant.setProvince("province");
-        List<Restaurant> list = new LinkedList<>();
-        list.add(restaurant);
-        list.add(restaurant);
-        return list;
+    public List<Restaurant> getAllRestaurant() {
+        return restaurantService.getNormalRestaurant();
     }
+
+    @RequestMapping("/getWaiting")
     @ResponseBody
-    @RequestMapping("/getDishItems")
-    public List<DishItem> getDishItems(int rid){
-        DishItem dishItem = new DishItem();
-        dishItem.setDescription("des");
-        dishItem.setName("name");
-        dishItem.setNum(10);
-        List<DishItem> dishItems = new LinkedList<>();
-        dishItems.add(dishItem);
-        dishItems.add(dishItem);
-        return dishItems;
+    public List<Restaurant> getWaitingRestaurant() {
+        return restaurantService.getWaitingRestaurant();
+    }
+
+    @ResponseBody
+    @RequestMapping("/signUp")
+    public String  signUp(@RequestBody  Restaurant restaurant) {
+
+        restaurantService.signUp(restaurant);
+        return restaurant.getRid();
+    }
+
+    @ResponseBody
+    @RequestMapping("/logIn")
+    public ResultMessage logIn(String id, String password) {
+
+        return restaurantService.logIn(id, password);
+
+    }
+
+    @RequestMapping("/findByID")
+    @ResponseBody
+    public Restaurant getRestaurant(String ID) {
+
+        return restaurantService.findByID(ID);
     }
 
 

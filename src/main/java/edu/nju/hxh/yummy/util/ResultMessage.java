@@ -29,5 +29,13 @@ public enum ResultMessage {
      * 余额不足
      */
     NOTENOUGHMONEY,
+    /**
+     * 等待
+     */
+    WAITING,
+    /**
+     * 拒绝
+     */
+    REJECTED,
 
 }

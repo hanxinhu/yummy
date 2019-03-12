@@ -22,9 +22,7 @@ import java.util.Set;
 public class Restaurant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(length = 7)
-    private int rid;
+    private String rid;
     private String name;
     private String password;
     private String description;
@@ -38,6 +36,28 @@ public class Restaurant {
     private String street;
 
     private String createTime;
+    private State state = State.waiting;
+
+    public static enum State {
+        /**
+         * 等待审批
+         */
+        waiting,
+        /**
+         * 审批通过
+         */
+        normal,
+        /**
+         * 被拒
+         */
+        rejected,
+
+    }
+
+    /**
+     * 是否正在审批
+     */
+    private boolean updating;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "rid", foreignKey = @ForeignKey(name = "rid", value = ConstraintMode.CONSTRAINT))
     private Set<Dish> dishes;
@@ -46,13 +66,5 @@ public class Restaurant {
 
     }
 
-    public List<DishItem> getDishItems(){
-        List<DishItem> dishItems = new LinkedList<>();
-        for(Dish d : dishes){
-            DishItem item = new DishItem(d);
-            dishItems.add(item);
-        }
-        return dishItems;
-    }
 
 }

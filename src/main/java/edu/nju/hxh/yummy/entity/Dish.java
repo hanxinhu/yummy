@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @author hxh
@@ -30,14 +27,20 @@ public class Dish {
 
 
     /**
-     * 每日的限量
+     * 库存
      */
     private int number;
+    /**
+     * 已经售出的量
+     */
+    private int sales;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "rid",foreignKey = @ForeignKey(name = "rid"))
+    @JoinColumn(name = "rid", foreignKey = @ForeignKey(name = "rid"))
     private Restaurant restaurant;
+
     public Dish() {
+
     }
 
 

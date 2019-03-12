@@ -44,6 +44,24 @@ public class Bill {
         canceled,
     }
 
+    /**
+     * 省份
+     */
+    private String province;
+    /**
+     * 城市
+     */
+    private String city;
+    /**
+     * 区
+     */
+    private String district;
+    /**
+     * 街道
+     */
+    private String street;
+    private String name;
+    private String phone;
     private State state = State.created;
     private boolean settled = false;
 
@@ -66,4 +84,5 @@ public class Bill {
 
     public Bill() {
     }
+
 }

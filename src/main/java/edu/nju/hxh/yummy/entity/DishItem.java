@@ -47,7 +47,6 @@ public class DishItem {
 
     public DishItem(Dish d){
         this.did = d.getId();
-        this.rid = d.getRestaurant().getRid();
         this.num = d.getNumber();
         this.name = d.getName();
         this.type = d.getType();
