@@ -38,7 +38,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Restaurant signUp(Restaurant restaurant) {
         String id = UUIDUtil.getUUID().substring(0, 7);
-        restaurant.setRid(id);
+        restaurant.setId(id);
         restaurantRepository.save(restaurant);
         return restaurant;
     }
@@ -62,5 +62,11 @@ public class RestaurantServiceImpl implements RestaurantService {
             }
         }
         return ResultMessage.FAILED;
+    }
+
+    @Override
+    public ResultMessage update(Restaurant restaurant) {
+        restaurantRepository.save(restaurant);
+        return ResultMessage.SUCCESS;
     }
 }

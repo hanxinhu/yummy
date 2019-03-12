@@ -36,7 +36,7 @@ public class Dish {
     private int sales;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "rid", foreignKey = @ForeignKey(name = "rid"))
+    @JoinColumn(name = "restaurantID", foreignKey = @ForeignKey(name = "restaurantID"))
     private Restaurant restaurant;
 
     public Dish() {

@@ -2,10 +2,7 @@ package edu.nju.hxh.yummy.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author hxh
@@ -17,10 +14,13 @@ public class InfoUpdate {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+
     /**
      * 餐厅的编号
      */
-    private int rid;
+    @Column(name = "restaurant")
+    private String rid;
 
     public static enum State{
         /**

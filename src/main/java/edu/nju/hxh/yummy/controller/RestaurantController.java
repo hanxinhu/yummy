@@ -1,6 +1,5 @@
 package edu.nju.hxh.yummy.controller;
 
-import edu.nju.hxh.yummy.entity.DishItem;
 import edu.nju.hxh.yummy.entity.Restaurant;
 import edu.nju.hxh.yummy.service.RestaurantService;
 import edu.nju.hxh.yummy.util.ResultMessage;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -39,10 +37,10 @@ public class RestaurantController {
 
     @ResponseBody
     @RequestMapping("/signUp")
-    public String  signUp(@RequestBody  Restaurant restaurant) {
+    public String signUp(@RequestBody Restaurant restaurant) {
 
         restaurantService.signUp(restaurant);
-        return restaurant.getRid();
+        return restaurant.getId();
     }
 
     @ResponseBody
@@ -52,6 +50,13 @@ public class RestaurantController {
         return restaurantService.logIn(id, password);
 
     }
+
+    @ResponseBody
+    @RequestMapping("/update")
+    public ResultMessage update(@RequestBody Restaurant restaurant) {
+        return restaurantService.update(restaurant);
+    }
+
 
     @RequestMapping("/findByID")
     @ResponseBody

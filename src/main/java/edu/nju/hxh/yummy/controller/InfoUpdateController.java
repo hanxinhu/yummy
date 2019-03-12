@@ -1,7 +1,9 @@
 package edu.nju.hxh.yummy.controller;
 
 import edu.nju.hxh.yummy.entity.InfoUpdate;
+import edu.nju.hxh.yummy.service.InfoUpdateService;
 import edu.nju.hxh.yummy.util.ResultMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,22 +21,25 @@ import java.util.List;
 @Controller
 @RequestMapping("/infoUpdate")
 public class InfoUpdateController {
+    @Autowired
+    InfoUpdateService infoUpdateService;
+
     @RequestMapping("/new")
     @ResponseBody
-    public ResultMessage newInfoUpdate(@RequestBody InfoUpdate infoUpdate){
-        return ResultMessage.SUCCESS;
+    public ResultMessage newInfoUpdate(@RequestBody InfoUpdate infoUpdate) {
+        return infoUpdateService.newUpdate(infoUpdate);
     }
 
     @RequestMapping("/update")
     @ResponseBody
-    public ResultMessage updateInfoUpdate(@RequestBody InfoUpdate infoUpdate){
+    public ResultMessage updateInfoUpdate(@RequestBody InfoUpdate infoUpdate) {
         System.out.println(infoUpdate.getState());
-        return ResultMessage.SUCCESS;
+        return infoUpdateService.updateInfo(infoUpdate);
     }
 
     @RequestMapping("/getAll")
     @ResponseBody
-    public List<InfoUpdate> getAllUpdateInfoUpdate(){
+    public List<InfoUpdate> getAllUpdateInfoUpdate() {
         InfoUpdate update = new InfoUpdate();
         update.setCityAfter("is here");
         update.setProvinceBefore("I am here");

@@ -21,4 +21,6 @@ public interface RestaurantService {
 
     public List<Restaurant> getNormalRestaurant();
 
+    public ResultMessage update(Restaurant restaurant);
+
 }
