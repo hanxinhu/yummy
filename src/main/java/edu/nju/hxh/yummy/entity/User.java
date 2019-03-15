@@ -1,5 +1,6 @@
 package edu.nju.hxh.yummy.entity;
 
+import edu.nju.hxh.yummy.util.TimeUtil;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -46,7 +47,7 @@ public class User {
      * 保存uuid 激活用
      */
     private String token;
-    private String createTime;
+    private String createTime = TimeUtil.getDate();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "user_id", value = ConstraintMode.CONSTRAINT))

@@ -5,7 +5,8 @@ package edu.nju.hxh.yummy.entity;
  * @date 2019-02-15 18:24
  */
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,7 +15,8 @@ import java.util.Set;
  * @author hxh
  * @date 2019-02-15 15:28
  */
-@Data
+@Getter
+@Setter
 @Entity
 public class Restaurant {
 
@@ -58,17 +60,22 @@ public class Restaurant {
     @JoinColumn(name = "restaurantID", foreignKey = @ForeignKey(name = "restaurantID", value = ConstraintMode.CONSTRAINT))
     private Set<Dish> dishes;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "restaurantID", foreignKey = @ForeignKey(name = "restaurantID", value = ConstraintMode.CONSTRAINT))
+    private Set<Combo> combos;
+
     public Restaurant() {
 
     }
-    public void  setInfoUpdate(InfoUpdate infoUpdate){
+
+    public void setInfoUpdate(InfoUpdate infoUpdate) {
         this.name = infoUpdate.getNameAfter();
         this.description = infoUpdate.getDescriptionAfter();
         this.city = infoUpdate.getCityAfter();
         this.province = infoUpdate.getProvinceAfter();
         this.district = infoUpdate.getDistrictAfter();
         this.street = infoUpdate.getStreetAfter();
-        this.type =infoUpdate.getTypeAfter();
+        this.type = infoUpdate.getTypeAfter();
     }
 
 

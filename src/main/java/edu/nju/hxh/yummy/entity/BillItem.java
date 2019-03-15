@@ -22,7 +22,7 @@ public class BillItem {
     private int num;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "bid",foreignKey = @ForeignKey(name = "bid"))
+    @JoinColumn(name = "bid", foreignKey = @ForeignKey(name = "bid"))
     private Bill bill;
 
     public BillItem() {

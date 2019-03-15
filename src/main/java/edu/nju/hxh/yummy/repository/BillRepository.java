@@ -12,7 +12,14 @@ import java.util.List;
  * @date 2019-03-09 18:49
  */
 @Repository
-public interface BillRepository extends CrudRepository<Bill,Integer> {
+public interface BillRepository extends CrudRepository<Bill, Integer> {
 
     public List<Bill> findBillsBySettled(boolean settled);
+
+    public List<Bill> findAllByUid(int uid);
+
+    public List<Bill> findAllByRid(String rid);
+
+    public List<Bill> findBySettledAndState(boolean settled,Bill.State state);
 }
+

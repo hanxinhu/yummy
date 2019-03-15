@@ -61,7 +61,7 @@ public class RestaurantController {
     @RequestMapping("/findByID")
     @ResponseBody
     public Restaurant getRestaurant(String ID) {
-
+        System.out.println(ID);
         return restaurantService.findByID(ID);
     }
 
