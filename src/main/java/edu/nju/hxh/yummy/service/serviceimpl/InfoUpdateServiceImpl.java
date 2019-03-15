@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author hxh
  * @date 2019-03-12 17:01
@@ -42,5 +44,10 @@ public class InfoUpdateServiceImpl implements InfoUpdateService {
         restaurantRepository.save(restaurant);
         infoUpdateRepository.save(infoUpdate);
         return ResultMessage.SUCCESS;
+    }
+
+    @Override
+    public List<InfoUpdate> findWaitingUpdate() {
+        return infoUpdateRepository.findByState(InfoUpdate.State.waiting);
     }
 }

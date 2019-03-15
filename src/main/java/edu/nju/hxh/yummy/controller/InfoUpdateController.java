@@ -40,13 +40,8 @@ public class InfoUpdateController {
     @RequestMapping("/getAll")
     @ResponseBody
     public List<InfoUpdate> getAllUpdateInfoUpdate() {
-        InfoUpdate update = new InfoUpdate();
-        update.setCityAfter("is here");
-        update.setProvinceBefore("I am here");
-        update.setState(InfoUpdate.State.approved);
-        List<InfoUpdate> updates = new ArrayList<>();
-        updates.add(update);
-        return updates;
+
+        return infoUpdateService.findWaitingUpdate();
     }
 
 
