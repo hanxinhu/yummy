@@ -23,9 +23,6 @@ public class BillController {
     @RequestMapping("/create")
     @ResponseBody
     public int createBill(@RequestBody Bill bill) {
-
-        System.out.println("GOT IT");
-        System.out.println(bill.getItems().size());
         billService.create(bill);
         return bill.getId();
     }
